@@ -29,16 +29,18 @@ public class CommandLine {
         double mmCutWidth = Double.parseDouble(args[5]);
         double mmNotchLength = Double.parseDouble(args[6]);
         boolean drawBoundingBox = Boolean.parseBoolean(args[7]);
-        boolean hideText = Boolean.parseBoolean(args[8]);  // [CUCFL]
-        boolean epiloglinewidth = Boolean.parseBoolean(args[9]);  // [CUCFL]
-		boolean compact = Boolean.parseBoolean(args[10]);  // [CUCFL]
-		boolean doportrait = Boolean.parseBoolean(args[11]);  // [CUCFL]
+        // add four arguments to modify behavior          [CUCFL]
+        boolean hideText = Boolean.parseBoolean(args[8]);  // suppress printing text on drawing [CUCFL]
+        boolean epiloglinewidth = Boolean.parseBoolean(args[9]);  // make lines .001 in for Epilog laser [CUCFL]
+		boolean compact = Boolean.parseBoolean(args[10]);  // layout parts in compact area [CUCFL]
+		boolean doportrait = Boolean.parseBoolean(args[11]);  // layout 'portrait' instead of 'landscape' [CUCFL]
         
         // try to render it, don't do any error handling (file won't get created)
         try {
             Renderer.render(filePath,filePath,mmWidth,mmHeight,mmDepth,
                             mmThickness,mmCutWidth,mmNotchLength,
-                            drawBoundingBox,false,hideText,epiloglinewidth,compact,doportrait);
+                            drawBoundingBox,false,
+                            hideText,epiloglinewidth,compact,doportrait); // add params [CUCFL]
         } catch (FileNotFoundException e) {
             System.out.println("ERROR!"+e.toString());
             System.exit(0);
